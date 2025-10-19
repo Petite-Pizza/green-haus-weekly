@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dr. Greenthumb — Do-Over Week</title>
+<style>
+  :root { --bg:#0f1412; --card:#141a17; --ink:#e9f2ed; --muted:#a8bbb2; --accent:#6ee7b7; --line:#223028; }
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;}
+  .wrap{max-width:860px;margin:0 auto;padding:20px;}
+  h1{font-size:22px;margin:0 0 4px 0;}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:12px}
+  .day{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:14px}
+  .day h3{margin:0 0 8px 0;font-size:16px;display:flex;justify-content:space-between;align-items:center}
+  .task{display:flex;gap:10px;align-items:flex-start;margin-bottom:8px}
+  .task input{width:18px;height:18px;margin-top:2px}
+  .meta{font-size:12px;color:var(--muted)}
+  footer{color:var(--muted);font-size:12px;margin-top:18px;border-top:1px solid var(--line);padding-top:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🌿 Do-Over Week</h1>
+  <div class="sub">Sept 14 – Sept 20 • Refocus, re-water, recover</div>
+
+  <!-- Monday -->
+  <div class="day">
+    <h3>🌞 Monday</h3>
+    <label class="task"><input type="checkbox"/><div>Soil check 2–3″ deep — all Money Trees<div class="meta">Water today only if top layer is dry.</div></div></label>
+    <label class="task"><input type="checkbox"/><div>Dracaena — soil check + light water if dry<div class="meta">Hasn’t been watered recently.</div></div></label>
+    <label class="task"><input type="checkbox"/><div>Terracotta Cactus Bowl — inspect remaining plants<div class="meta">If soil is bone dry, water gently with repot recovery mix.</div></div></label>
+  </div>
+
+  <!-- Tuesday -->
+  <div class="day">
+    <h3>🌱 Tuesday</h3>
+    <label class="task"><input type="checkbox"/><div>Rotate Money Trees + Dracaena for even light</div></label>
+    <label class="task"><input type="checkbox"/><div>Wipe Dracaena leaves if dusty</div></label>
+  </div>
+
+  <!-- Wednesday -->
+  <div class="day">
+    <h3>💦 Wednesday</h3>
+    <label class="task"><input type="checkbox"/><div>Mist Dracaena lightly (if soil is dry)</div></label>
+    <label class="task"><input type="checkbox"/><div>Mini Money Tree — check for curling or pale leaves<div class="meta">Trim only if >50% of leaf is yellow.</div></div></label>
+  </div>
+
+  <!-- Thursday -->
+  <div class="day">
+    <h3>🪴 Thursday</h3>
+    <label class="task"><input type="checkbox"/><div>Surface fluff + airflow check — Money Trees and Dracaena</div></label>
+    <label class="task"><input type="checkbox"/><div>Inspect Cacti for soft spots or rot (Black Pot and Terracotta Bowl)</div></label>
+  </div>
+
+  <!-- Friday -->
+  <div class="day">
+    <h3>🌾 Friday</h3>
+    <label class="task"><input type="checkbox"/><div>Prep fresh repot recovery mix (64 oz water + ½ tsp powder)</div></label>
+    <label class="task"><input type="checkbox"/><div>Clean watering cans and shears for weekend tasks</div></label>
+  </div>
+
+  <!-- Saturday -->
+  <div class="day">
+    <h3>🌿 Saturday</h3>
+    <label class="task"><input type="checkbox"/><div>Water Cactus Bowl and Black Pot Group if completely dry</div></label>
+    <label class="task"><input type="checkbox"/><div>Spot-clean shelves + remove old leaf debris</div></label>
+  </div>
+
+  <!-- Sunday -->
+  <div class="day">
+    <h3>🌸 Sunday</h3>
+    <label class="task"><input type="checkbox"/><div>Update Dr. Greenthumb — record skipped tasks & notes</div></label>
+    <label class="task"><input type="checkbox"/><div>Plan next week’s theme + print (if needed)</div></label>
+  </div>
+
+  <footer>✨ Dr. Greenthumb • Green Haus • local only — checkboxes stay until you refresh</footer>
+</div>
+
+<script>
+  const boxes = document.querySelectorAll('input[type=checkbox]');
+  boxes.forEach((b,i)=>{
+    const key='gh5-'+i;
+    b.checked=localStorage.getItem(key)==='1';
+    b.addEventListener('change',()=>localStorage.setItem(key,b.checked?'1':'0'));
+  });
+</script>
+</body>
+</html>
