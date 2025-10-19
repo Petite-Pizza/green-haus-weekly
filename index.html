@@ -3,86 +3,243 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Dr. Greenthumb — Do-Over Week</title>
+<title>Dr. Greenthumb — Weekly</title>
 <style>
   :root { --bg:#0f1412; --card:#141a17; --ink:#e9f2ed; --muted:#a8bbb2; --accent:#6ee7b7; --line:#223028; }
   html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif;}
   .wrap{max-width:860px;margin:0 auto;padding:20px;}
-  h1{font-size:22px;margin:0 0 4px 0;}
-  .sub{color:var(--muted);font-size:14px;margin-bottom:12px}
-  .day{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:14px}
+  header{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+  h1{font-size:22px;margin:0;}
+  .sub{color:var(--muted);font-size:14px}
+  .controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .btn{background:var(--card);color:var(--ink);border:1px solid var(--line);padding:6px 10px;border-radius:10px;font-size:13px}
+  select{background:var(--card);color:var(--ink);border:1px solid var(--line);padding:6px 10px;border-radius:10px;font-size:13px}
+  .grid{display:grid;grid-template-columns:1fr;gap:12px;margin-top:12px}
+  @media(min-width:700px){.grid{grid-template-columns:repeat(2,1fr);}}
+  .day{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px}
   .day h3{margin:0 0 8px 0;font-size:16px;display:flex;justify-content:space-between;align-items:center}
-  .task{display:flex;gap:10px;align-items:flex-start;margin-bottom:8px}
+  .tasks{display:flex;flex-direction:column;gap:10px}
+  .task{display:flex;gap:10px;align-items:flex-start}
   .task input{width:18px;height:18px;margin-top:2px}
   .meta{font-size:12px;color:var(--muted)}
-  footer{color:var(--muted);font-size:12px;margin-top:18px;border-top:1px solid var(--line);padding-top:8px}
+  hr{border:none;border-top:1px solid var(--line);margin:18px 0}
+  footer{color:var(--muted);font-size:12px;margin-top:10px}
+  .pill{display:inline-block;padding:4px 8px;border:1px solid var(--line);border-radius:999px;color:var(--ink);font-size:12px;margin-left:6px}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>🌿 Do-Over Week</h1>
-  <div class="sub">Sept 14 – Sept 20 • Refocus, re-water, recover</div>
+  <header>
+    <h1 id="theme">🌿 Green Haus</h1>
+    <div class="sub" id="daterange">Week</div>
+    <div class="controls">
+      <button class="btn" id="prev">◀ Prev</button>
+      <button class="btn" id="today">This Week</button>
+      <button class="btn" id="next">Next ▶</button>
+      <select id="weekSelect" title="Choose week"></select>
+      <span class="pill" id="tip"></span>
+    </div>
+  </header>
 
-  <!-- Monday -->
-  <div class="day">
-    <h3>🌞 Monday</h3>
-    <label class="task"><input type="checkbox"/><div>Soil check 2–3″ deep — all Money Trees<div class="meta">Water today only if top layer is dry.</div></div></label>
-    <label class="task"><input type="checkbox"/><div>Dracaena — soil check + light water if dry<div class="meta">Hasn’t been watered recently.</div></div></label>
-    <label class="task"><input type="checkbox"/><div>Terracotta Cactus Bowl — inspect remaining plants<div class="meta">If soil is bone dry, water gently with repot recovery mix.</div></div></label>
-  </div>
+  <div class="grid" id="week"></div>
 
-  <!-- Tuesday -->
-  <div class="day">
-    <h3>🌱 Tuesday</h3>
-    <label class="task"><input type="checkbox"/><div>Rotate Money Trees + Dracaena for even light</div></label>
-    <label class="task"><input type="checkbox"/><div>Wipe Dracaena leaves if dusty</div></label>
-  </div>
-
-  <!-- Wednesday -->
-  <div class="day">
-    <h3>💦 Wednesday</h3>
-    <label class="task"><input type="checkbox"/><div>Mist Dracaena lightly (if soil is dry)</div></label>
-    <label class="task"><input type="checkbox"/><div>Mini Money Tree — check for curling or pale leaves<div class="meta">Trim only if >50% of leaf is yellow.</div></div></label>
-  </div>
-
-  <!-- Thursday -->
-  <div class="day">
-    <h3>🪴 Thursday</h3>
-    <label class="task"><input type="checkbox"/><div>Surface fluff + airflow check — Money Trees and Dracaena</div></label>
-    <label class="task"><input type="checkbox"/><div>Inspect Cacti for soft spots or rot (Black Pot and Terracotta Bowl)</div></label>
-  </div>
-
-  <!-- Friday -->
-  <div class="day">
-    <h3>🌾 Friday</h3>
-    <label class="task"><input type="checkbox"/><div>Prep fresh repot recovery mix (64 oz water + ½ tsp powder)</div></label>
-    <label class="task"><input type="checkbox"/><div>Clean watering cans and shears for weekend tasks</div></label>
-  </div>
-
-  <!-- Saturday -->
-  <div class="day">
-    <h3>🌿 Saturday</h3>
-    <label class="task"><input type="checkbox"/><div>Water Cactus Bowl and Black Pot Group if completely dry</div></label>
-    <label class="task"><input type="checkbox"/><div>Spot-clean shelves + remove old leaf debris</div></label>
-  </div>
-
-  <!-- Sunday -->
-  <div class="day">
-    <h3>🌸 Sunday</h3>
-    <label class="task"><input type="checkbox"/><div>Update Dr. Greenthumb — record skipped tasks & notes</div></label>
-    <label class="task"><input type="checkbox"/><div>Plan next week’s theme + print (if needed)</div></label>
-  </div>
-
-  <footer>✨ Dr. Greenthumb • Green Haus • local only — checkboxes stay until you refresh</footer>
+  <hr/>
+  <div class="sub">✨ Dr. Greenthumb — multi-week, local-storage checklist. Edit weeks inside this file (CONFIG.WEEKS).</div>
+  <footer>Green Haus • Petite-Pizza • Hosted on GitHub Pages</footer>
 </div>
 
 <script>
-  const boxes = document.querySelectorAll('input[type=checkbox]');
-  boxes.forEach((b,i)=>{
-    const key='gh5-'+i;
-    b.checked=localStorage.getItem(key)==='1';
-    b.addEventListener('change',()=>localStorage.setItem(key,b.checked?'1':'0'));
+/* ========= CONFIGURE YOUR WEEKS HERE ========= */
+// Emoji per weekday (Mon..Sun)
+const EMOJI = ["🌞","🌱","💦","🪴","🌾","🌿","🌸"];
+
+// Preloaded weeks: start = ISO Monday, theme, tips, and tasks per weekday index 0..6
+const WEEKS = [
+  {
+    start: "2025-10-20", // Mon Oct 20, 2025
+    theme: "🍂 Fall Reset",
+    tips: ["Keep airflow up; skip misting if soil feels heavy.","Rotate ¼ turn mid-week.","Post-repot: no fertilizer yet."],
+    plan: {
+      0: [ // Monday
+        {text:'Soil check 2–3" deep — all Money Trees', meta:'Water today only if top layer is dry.'},
+        {text:'Dracaena — soil check + light water if dry', meta:'Hasn’t been watered lately.'},
+        {text:'Terracotta Cactus Bowl — inspect remaining plants', meta:'If bone dry & firm, water gently with recovery mix.'}
+      ],
+      1: [ // Tuesday
+        {text:'Rotate Money Trees + Dracaena for even light'},
+        {text:'Wipe Dracaena leaves if dusty', opt:true}
+      ],
+      2: [ // Wednesday
+        {text:'Mini Money Tree — watch for curling or pale leaves', meta:'Trim only if >50% yellow.'},
+        {text:'Dracaena — mist lightly (only if soil is dry)', opt:true}
+      ],
+      3: [ // Thursday
+        {text:'Surface fluff + airflow check — Money Trees & Dracaena'},
+        {text:'Inspect cacti (Black Pot + Terracotta) for soft spots/rot'}
+      ],
+      4: [ // Friday
+        {text:'Mix recovery water (64 oz = ½ tsp) if low', meta:'Shake before each use.'},
+        {text:'Quick pest scan — underside of leaves', opt:true}
+      ],
+      5: [ // Saturday
+        {text:'Water cacti only if completely dry', meta:'Terracotta Bowl + Black Pot Family'}
+      ],
+      6: [ // Sunday
+        {text:'Update Dr. Greenthumb — notes & skipped tasks'},
+        {text:'Pick next week’s theme', opt:true}
+      ]
+    }
+  },
+  {
+    start: "2025-10-27", // Week 2
+    theme: "🌾 Root Renaissance",
+    tips: ["Shorter days — favor bright, indirect light.","Water by dryness, not calendar.","Dust leaves = better photosynthesis."],
+    plan: {
+      0: [
+        {text:'Soil check — Money Trees (2–3")', meta:'Water if dry; skip if cool/damp.'},
+        {text:'Dracaena — soil check; water lightly if dry'}
+      ],
+      1: [
+        {text:'Rotate Money Trees + Dracaena'},
+        {text:'Mini Money Tree — check young stems'}
+      ],
+      2: [
+        {text:'Cacti check (no water unless bone dry)'},
+        {text:'Black Pot Family — fishbone stem check for firmness'}
+      ],
+      3: [
+        {text:'Surface fluff — Money Trees & Dracaena'},
+        {text:'Prune >50% yellow leaves on Tall Money Tree', opt:true}
+      ],
+      4: [
+        {text:'Mix recovery water if low (64 oz = ½ tsp)'},
+        {text:'Quick shelf clean + remove old leaf debris', opt:true}
+      ],
+      5: [
+        {text:'Money Trees — water any that are dry', meta:'Slow, even, stop at first drainage.'}
+      ],
+      6: [
+        {text:'Log changes & skipped tasks'},
+        {text:'Set theme for next week', opt:true}
+      ]
+    }
+  },
+  {
+    start: "2025-11-03", // Week 3
+    theme: "🌿 Steady Growth",
+    tips: ["Mind drafts as temps drop.","Let topsoil dry a bit longer in November.","Keep light bright and consistent."],
+    plan: {
+      0: [
+        {text:'Money Trees — soil check; water only if dry'},
+        {text:'Dracaena — light water if dry; skip mist if soil heavy'}
+      ],
+      1: [
+        {text:'Rotate Money Trees + Dracaena'},
+        {text:'Wipe leaves (money trees + dracaena)', opt:true}
+      ],
+      2: [
+        {text:'Cacti — visual check for softness; no water unless bone dry'}
+      ],
+      3: [
+        {text:'Surface fluff + airflow check (all non-cacti)'}
+      ],
+      4: [
+        {text:'Mix recovery water if low (64 oz = ½ tsp)'}
+      ],
+      5: [
+        {text:'Spot water any one plant that tested dry (not cacti)'}
+      ],
+      6: [
+        {text:'Log & theme prep for next week'}
+      ]
+    }
+  }
+];
+
+/* ========= UTILITIES ========= */
+const MS = 86400000;
+const toISOdate = d => new Date(d.getFullYear(), d.getMonth(), d.getDate()).toISOString().slice(0,10);
+const fmt = d => d.toLocaleDateString(undefined,{month:'short',day:'numeric'});
+const weekday = d => d.toLocaleDateString(undefined,{weekday:'long'});
+
+/* ========= APP STATE ========= */
+let idx = 0; // current week index (defaults to first)
+
+/* ========= RENDER ========= */
+function render(){
+  const week = WEEKS[idx];
+  const start = new Date(week.start + 'T00:00:00');
+  const end = new Date(start.getTime()+6*MS);
+  document.getElementById('theme').textContent = week.theme;
+  document.getElementById('daterange').textContent = `${fmt(start)} – ${fmt(end)}`;
+  document.getElementById('tip').textContent = week.tips?.[0] || '';
+
+  // week select
+  const sel = document.getElementById('weekSelect');
+  sel.innerHTML = '';
+  WEEKS.forEach((w,i)=>{
+    const s = new Date(w.start+'T00:00:00');
+    const opt = document.createElement('option');
+    opt.value = i; opt.textContent = `${fmt(s)} — ${w.theme.replace(/^[^ ]+ /,'')}`;
+    if(i===idx) opt.selected = true;
+    sel.appendChild(opt);
   });
+
+  const grid = document.getElementById('week');
+  grid.innerHTML = '';
+  const state = loadState(week.start);
+
+  for(let i=0;i<7;i++){
+    const day = new Date(start.getTime()+i*MS);
+    const card = document.createElement('div'); card.className='day';
+    const h = document.createElement('h3');
+    h.innerHTML = `<span>${EMOJI[i%EMOJI.length]} ${weekday(day)}</span><span>${fmt(day)}</span>`;
+    card.appendChild(h);
+
+    const tasks = week.plan[i] || [];
+    const list = document.createElement('div'); list.className='tasks';
+    tasks.forEach((t, j)=>{
+      const id = `${i}::${j}`;
+      const row = document.createElement('label'); row.className='task';
+      const cb = document.createElement('input'); cb.type='checkbox'; cb.checked = !!state[id];
+      cb.addEventListener('change', ()=>{ state[id]=cb.checked; saveState(week.start,state); });
+      const text = document.createElement('div');
+      text.innerHTML = `${t.opt ? '(optional) ' : ''}${t.text}${t.meta?`<div class="meta">${t.meta}</div>`:''}`;
+      row.appendChild(cb); row.appendChild(text); list.appendChild(row);
+    });
+    card.appendChild(list);
+    grid.appendChild(card);
+  }
+}
+
+/* ========= STORAGE (per-week) ========= */
+function loadState(weekStartISO){ return JSON.parse(localStorage.getItem(`ghw-${weekStartISO}`)) || {}; }
+function saveState(weekStartISO, state){ localStorage.setItem(`ghw-${weekStartISO}`, JSON.stringify(state)); }
+
+/* ========= NAV ========= */
+document.getElementById('prev').onclick = ()=>{ idx = Math.max(0, idx-1); render(); };
+document.getElementById('next').onclick = ()=>{ idx = Math.min(WEEKS.length-1, idx+1); render(); };
+document.getElementById('today').onclick = ()=>{
+  const today = new Date();
+  const found = WEEKS.findIndex(w => {
+    const s = new Date(w.start+'T00:00:00'); const e = new Date(s.getTime()+6*MS);
+    return today>=s && today<=e;
+  });
+  if(found>=0) idx = found; render();
+};
+document.getElementById('weekSelect').onchange = (e)=>{ idx = Number(e.target.value); render(); };
+
+/* ========= BOOT ========= */
+// auto-select the week that contains “today” if present
+(function init(){
+  const today = new Date();
+  const found = WEEKS.findIndex(w => {
+    const s = new Date(w.start+'T00:00:00'); const e = new Date(s.getTime()+6*MS);
+    return today>=s && today<=e;
+  });
+  if(found>=0) idx = found;
+  render();
+})();
 </script>
 </body>
 </html>
